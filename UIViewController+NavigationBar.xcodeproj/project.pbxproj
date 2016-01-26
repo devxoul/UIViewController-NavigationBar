@@ -10,6 +10,7 @@
 		036315221C57E20900D30B9D /* UIViewController+NavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 036315211C57E20900D30B9D /* UIViewController+NavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		036315291C57E20900D30B9D /* UIViewController+NavigationBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0363151E1C57E20900D30B9D /* UIViewController+NavigationBar.framework */; };
 		0363152E1C57E20900D30B9D /* UIViewController_NavigationBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0363152D1C57E20900D30B9D /* UIViewController_NavigationBarTests.m */; };
+		036315391C57E30100D30B9D /* UIViewController+NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 036315381C57E30100D30B9D /* UIViewController+NavigationBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		036315281C57E20900D30B9D /* UIViewController+NavigationBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIViewController+NavigationBarTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0363152D1C57E20900D30B9D /* UIViewController_NavigationBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewController_NavigationBarTests.m; sourceTree = "<group>"; };
 		0363152F1C57E20900D30B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		036315381C57E30100D30B9D /* UIViewController+NavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBar.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				036315211C57E20900D30B9D /* UIViewController+NavigationBar.h */,
+				036315381C57E30100D30B9D /* UIViewController+NavigationBar.m */,
 				036315231C57E20900D30B9D /* Info.plist */,
 			);
 			path = "UIViewController+NavigationBar";
@@ -193,6 +196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				036315391C57E30100D30B9D /* UIViewController+NavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +378,7 @@
 				036315341C57E20900D30B9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		036315351C57E20900D30B9D /* Build configuration list for PBXNativeTarget "UIViewController+NavigationBarTests" */ = {
 			isa = XCConfigurationList;
@@ -382,6 +387,7 @@
 				036315371C57E20900D30B9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
