@@ -94,7 +94,7 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
         navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
         navigationBar.delegate = self;
         objc_setAssociatedObject(self, @selector(navigationBar), navigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [self updateNavigationItem:navigationBar];
+        [self updateNavigationItem];
         for (NSString *key in self.class.observingKeys) {
             [self addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:nil];
         }
@@ -105,13 +105,20 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 
 #pragma mark - Updating navigation item
 
-- (void)updateNavigationItem:(UINavigationBar *)navigationBar {
+- (void)updateNavigationItem {
+    if ([self isKindOfClass:UINavigationController.class]) {
+        return;
+    }
+
     UINavigationItem *navigationItem = [self deepCopy:self.navigationItem];
     navigationItem.hidesBackButton = self.navigationItem.hidesBackButton;
     navigationItem.leftItemsSupplementBackButton = self.navigationItem.leftItemsSupplementBackButton;
 
-    navigationBar.items = [self deepCopy:self.navigationController.navigationBar.items];
-    [navigationBar pushNavigationItem:navigationItem animated:NO];
+    NSMutableArray<UINavigationItem *> *items = @[].mutableCopy;
+    for (UIViewController *viewController in self.navigationController.viewControllers) {
+        [items addObject:[self deepCopy:viewController.navigationItem]];
+    }
+    self.navigationBar.items = items;
 }
 
 
@@ -120,8 +127,9 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 - (void)UIViewControllerNavigationBar_viewWillAppear:(BOOL)animated {
     [self UIViewControllerNavigationBar_viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:self.hasNavigationBar animated:animated];
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    [self updateNavigationItem];
 }
-
 
 - (void)UIViewControllerNavigationBar_viewDidLayoutSubviews {
     [self UIViewControllerNavigationBar_viewDidLayoutSubviews];
@@ -135,7 +143,7 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
                                               change:(NSDictionary<NSString *,id> *)change
                                              context:(void *)context {
     if ([self.class.observingKeys containsObject:keyPath]) {
-        [self updateNavigationItem:self.navigationBar];
+        [self updateNavigationItem];
     } else {
         [self UIViewControllerNavigationBar_observeValueForKeyPath:keyPath
                                                           ofObject:object
