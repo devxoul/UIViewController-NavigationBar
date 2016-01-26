@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		036315221C57E20900D30B9D /* UIViewController+NavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 036315211C57E20900D30B9D /* UIViewController+NavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		036315291C57E20900D30B9D /* UIViewController_NavigationBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0363151E1C57E20900D30B9D /* UIViewController_NavigationBar.framework */; };
-		0363152E1C57E20900D30B9D /* UIViewController_NavigationBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0363152D1C57E20900D30B9D /* UIViewController_NavigationBarTests.m */; };
-		036315391C57E30100D30B9D /* UIViewController+NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 036315381C57E30100D30B9D /* UIViewController+NavigationBar.m */; };
+		036315461C57E77000D30B9D /* UIViewController+NavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 036315401C57E6E400D30B9D /* UIViewController+NavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		036315471C57E78600D30B9D /* UIViewController+NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 036315411C57E6E400D30B9D /* UIViewController+NavigationBar.m */; };
+		0363154C1C57E8B400D30B9D /* UIViewController+NavigationBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0363154B1C57E8B400D30B9D /* UIViewController+NavigationBarTests.swift */; };
+		0363154F1C57EBC500D30B9D /* UIViewController_NavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 0363154E1C57EBA500D30B9D /* UIViewController_NavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,12 +26,12 @@
 
 /* Begin PBXFileReference section */
 		0363151E1C57E20900D30B9D /* UIViewController_NavigationBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIViewController_NavigationBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		036315211C57E20900D30B9D /* UIViewController+NavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBar.h"; sourceTree = "<group>"; };
-		036315231C57E20900D30B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036315281C57E20900D30B9D /* UIViewController+NavigationBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIViewController+NavigationBarTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0363152D1C57E20900D30B9D /* UIViewController_NavigationBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewController_NavigationBarTests.m; sourceTree = "<group>"; };
-		0363152F1C57E20900D30B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		036315381C57E30100D30B9D /* UIViewController+NavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBar.m"; sourceTree = "<group>"; };
+		0363153D1C57E6E000D30B9D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		036315401C57E6E400D30B9D /* UIViewController+NavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBar.h"; sourceTree = "<group>"; };
+		036315411C57E6E400D30B9D /* UIViewController+NavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBar.m"; sourceTree = "<group>"; };
+		0363154B1C57E8B400D30B9D /* UIViewController+NavigationBarTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationBarTests.swift"; sourceTree = "<group>"; };
+		0363154E1C57EBA500D30B9D /* UIViewController_NavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewController_NavigationBar.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +56,9 @@
 		036315141C57E20900D30B9D = {
 			isa = PBXGroup;
 			children = (
-				036315201C57E20900D30B9D /* UIViewController+NavigationBar */,
-				0363152C1C57E20900D30B9D /* UIViewController+NavigationBarTests */,
+				0363153F1C57E6E400D30B9D /* Sources */,
+				036315431C57E71700D30B9D /* Tests */,
+				0363153C1C57E6E000D30B9D /* Supporting Files */,
 				0363151F1C57E20900D30B9D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,23 +72,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		036315201C57E20900D30B9D /* UIViewController+NavigationBar */ = {
+		0363153C1C57E6E000D30B9D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				036315211C57E20900D30B9D /* UIViewController+NavigationBar.h */,
-				036315381C57E30100D30B9D /* UIViewController+NavigationBar.m */,
-				036315231C57E20900D30B9D /* Info.plist */,
+				0363153D1C57E6E000D30B9D /* Info.plist */,
 			);
-			path = "UIViewController+NavigationBar";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0363152C1C57E20900D30B9D /* UIViewController+NavigationBarTests */ = {
+		0363153F1C57E6E400D30B9D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0363152D1C57E20900D30B9D /* UIViewController_NavigationBarTests.m */,
-				0363152F1C57E20900D30B9D /* Info.plist */,
+				0363154E1C57EBA500D30B9D /* UIViewController_NavigationBar.h */,
+				036315401C57E6E400D30B9D /* UIViewController+NavigationBar.h */,
+				036315411C57E6E400D30B9D /* UIViewController+NavigationBar.m */,
 			);
-			path = "UIViewController+NavigationBarTests";
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		036315431C57E71700D30B9D /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0363154B1C57E8B400D30B9D /* UIViewController+NavigationBarTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,7 +105,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036315221C57E20900D30B9D /* UIViewController+NavigationBar.h in Headers */,
+				0363154F1C57EBC500D30B9D /* UIViewController_NavigationBar.h in Headers */,
+				036315461C57E77000D30B9D /* UIViewController+NavigationBar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036315391C57E30100D30B9D /* UIViewController+NavigationBar.m in Sources */,
+				036315471C57E78600D30B9D /* UIViewController+NavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0363152E1C57E20900D30B9D /* UIViewController_NavigationBarTests.m in Sources */,
+				0363154C1C57E8B400D30B9D /* UIViewController+NavigationBarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -297,7 +307,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -314,7 +324,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "UIViewController+NavigationBar/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.UIViewController-NavigationBar";
@@ -330,7 +340,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "UIViewController+NavigationBar/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.UIViewController-NavigationBar";
@@ -342,17 +352,20 @@
 		036315361C57E20900D30B9D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "UIViewController+NavigationBarTests/Info.plist";
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.UIViewController-NavigationBarTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		036315371C57E20900D30B9D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "UIViewController+NavigationBarTests/Info.plist";
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.UIViewController-NavigationBarTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
