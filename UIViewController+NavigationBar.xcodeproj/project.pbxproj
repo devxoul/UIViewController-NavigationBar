@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		036315221C57E20900D30B9D /* UIViewController+NavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 036315211C57E20900D30B9D /* UIViewController+NavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		036315291C57E20900D30B9D /* UIViewController+NavigationBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0363151E1C57E20900D30B9D /* UIViewController+NavigationBar.framework */; };
+		036315291C57E20900D30B9D /* UIViewController_NavigationBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0363151E1C57E20900D30B9D /* UIViewController_NavigationBar.framework */; };
 		0363152E1C57E20900D30B9D /* UIViewController_NavigationBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0363152D1C57E20900D30B9D /* UIViewController_NavigationBarTests.m */; };
 		036315391C57E30100D30B9D /* UIViewController+NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 036315381C57E30100D30B9D /* UIViewController+NavigationBar.m */; };
 /* End PBXBuildFile section */
@@ -24,7 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0363151E1C57E20900D30B9D /* UIViewController+NavigationBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "UIViewController+NavigationBar.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0363151E1C57E20900D30B9D /* UIViewController_NavigationBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIViewController_NavigationBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		036315211C57E20900D30B9D /* UIViewController+NavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBar.h"; sourceTree = "<group>"; };
 		036315231C57E20900D30B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036315281C57E20900D30B9D /* UIViewController+NavigationBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIViewController+NavigationBarTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036315291C57E20900D30B9D /* UIViewController+NavigationBar.framework in Frameworks */,
+				036315291C57E20900D30B9D /* UIViewController_NavigationBar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +64,7 @@
 		0363151F1C57E20900D30B9D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0363151E1C57E20900D30B9D /* UIViewController+NavigationBar.framework */,
+				0363151E1C57E20900D30B9D /* UIViewController_NavigationBar.framework */,
 				036315281C57E20900D30B9D /* UIViewController+NavigationBarTests.xctest */,
 			);
 			name = Products;
@@ -118,7 +118,7 @@
 			);
 			name = "UIViewController+NavigationBar";
 			productName = "UIViewController+NavigationBar";
-			productReference = 0363151E1C57E20900D30B9D /* UIViewController+NavigationBar.framework */;
+			productReference = 0363151E1C57E20900D30B9D /* UIViewController_NavigationBar.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		036315271C57E20900D30B9D /* UIViewController+NavigationBarTests */ = {
@@ -318,7 +318,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.UIViewController-NavigationBar";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -334,7 +334,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.UIViewController-NavigationBar";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
