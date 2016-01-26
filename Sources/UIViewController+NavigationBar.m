@@ -46,6 +46,9 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 }
 
 
+@interface UIViewController (_NavigationBar) <UINavigationBarDelegate>
+@end
+
 @implementation UIViewController (NavigationBar)
 
 + (void)load {
@@ -99,9 +102,16 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     return navigationBar;
 }
 
+
+#pragma mark - Updating navigation item
+
 - (void)updateNavigationItem:(UINavigationBar *)navigationBar {
+    UINavigationItem *navigationItem = [self deepCopy:self.navigationItem];
+    navigationItem.hidesBackButton = self.navigationItem.hidesBackButton;
+    navigationItem.leftItemsSupplementBackButton = self.navigationItem.leftItemsSupplementBackButton;
+
     navigationBar.items = [self deepCopy:self.navigationController.navigationBar.items];
-    [navigationBar pushNavigationItem:[self deepCopy:self.navigationItem] animated:NO];
+    [navigationBar pushNavigationItem:navigationItem animated:NO];
 }
 
 
@@ -127,19 +137,20 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     if ([self.class.observingKeys containsObject:keyPath]) {
         [self updateNavigationItem:self.navigationBar];
     } else {
-        [self UIViewControllerNavigationBar_observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        [self UIViewControllerNavigationBar_observeValueForKeyPath:keyPath
+                                                          ofObject:object
+                                                            change:change
+                                                           context:context];
     }
 }
 
 - (void)UIViewControllerNavigationBar_dealloc {
-    if (self.hasNavigationBar) {
-        for (NSString *key in self.class.observingKeys) {
-            @try {
-                [self removeObserver:self forKeyPath:key];
-            }
-            @catch (NSException *exception) {
-                // Do nothing
-            }
+    for (NSString *key in self.class.observingKeys) {
+        @try {
+            [self removeObserver:self forKeyPath:key];
+        }
+        @catch (NSException *exception) {
+            // Do nothing
         }
     }
     [self UIViewControllerNavigationBar_dealloc];

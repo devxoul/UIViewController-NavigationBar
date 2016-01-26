@@ -22,7 +22,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (NavigationBar) <UINavigationBarDelegate>
+@interface UIViewController (NavigationBar)
 
 @property (nonatomic, assign) BOOL hasNavigationBar;
 @property (nonatomic, strong, readonly, nonnull) UINavigationBar *navigationBar;
