@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0363151D1C57E20900D30B9D"
-               BuildableName = "UIViewController+NavigationBar.framework"
+               BuildableName = "UIViewController_NavigationBar.framework"
                BlueprintName = "UIViewController+NavigationBar"
                ReferencedContainer = "container:UIViewController+NavigationBar.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0363151D1C57E20900D30B9D"
-            BuildableName = "UIViewController+NavigationBar.framework"
+            BuildableName = "UIViewController_NavigationBar.framework"
             BlueprintName = "UIViewController+NavigationBar"
             ReferencedContainer = "container:UIViewController+NavigationBar.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0363151D1C57E20900D30B9D"
-            BuildableName = "UIViewController+NavigationBar.framework"
+            BuildableName = "UIViewController_NavigationBar.framework"
             BlueprintName = "UIViewController+NavigationBar"
             ReferencedContainer = "container:UIViewController+NavigationBar.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0363151D1C57E20900D30B9D"
-            BuildableName = "UIViewController+NavigationBar.framework"
+            BuildableName = "UIViewController_NavigationBar.framework"
             BlueprintName = "UIViewController+NavigationBar"
             ReferencedContainer = "container:UIViewController+NavigationBar.xcodeproj">
          </BuildableReference>
