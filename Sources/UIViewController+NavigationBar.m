@@ -179,7 +179,8 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 #pragma mark - UINavigationBarDelegate
 
 - (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item {
-    return [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+    return YES;
 }
 
 @end
