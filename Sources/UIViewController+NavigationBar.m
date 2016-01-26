@@ -110,14 +110,18 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
         return;
     }
 
-    UINavigationItem *navigationItem = [self deepCopy:self.navigationItem];
-    navigationItem.hidesBackButton = self.navigationItem.hidesBackButton;
-    navigationItem.leftItemsSupplementBackButton = self.navigationItem.leftItemsSupplementBackButton;
-
     NSMutableArray<UINavigationItem *> *items = @[].mutableCopy;
     for (UIViewController *viewController in self.navigationController.viewControllers) {
         [items addObject:[self deepCopy:viewController.navigationItem]];
     }
+
+    if (items.count) {
+        UINavigationItem *navigationItem = [self deepCopy:self.navigationItem];
+        navigationItem.hidesBackButton = self.navigationItem.hidesBackButton;
+        navigationItem.leftItemsSupplementBackButton = self.navigationItem.leftItemsSupplementBackButton;
+        items[items.count - 1] = navigationItem;
+    }
+
     self.navigationBar.items = items;
 }
 

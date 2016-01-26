@@ -30,11 +30,13 @@ class Tests: XCTestCase {
     // MARK: testNavigationItemObserving
 
     func testNavigationItemObserving_title() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.title = "Hello!"
         XCTAssertEqual(self.viewController.navigationBar.items?.first?.title, "Hello!")
     }
 
     func testNavigationItemObserving_titleView() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.titleView = {
             let view = UIView()
             view.backgroundColor = .redColor()
@@ -44,11 +46,13 @@ class Tests: XCTestCase {
     }
 
     func testNavigationItemObserving_prompt() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.prompt = "Prompt"
         XCTAssertEqual(self.viewController.navigationBar.items?.first?.prompt, "Prompt")
     }
 
     func testNavigationItemObserving_backBarButtonItem() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "Back!",
             style: .Plain,
@@ -59,6 +63,7 @@ class Tests: XCTestCase {
     }
 
     func testNavigationItemObserving_hidesBackButton() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.hidesBackButton = false
         XCTAssertEqual(self.viewController.navigationBar.items?.first?.hidesBackButton, false)
         self.viewController.navigationItem.hidesBackButton = true
@@ -66,6 +71,7 @@ class Tests: XCTestCase {
     }
 
     func testNavigationItemObserving_rightBarButtonItem() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Right!",
             style: .Plain,
@@ -76,6 +82,7 @@ class Tests: XCTestCase {
     }
 
     func testNavigationItemObserving_rightBarButtonItems() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.rightBarButtonItems = [
             UIBarButtonItem(
                 title: "Right1",
@@ -96,6 +103,7 @@ class Tests: XCTestCase {
     }
 
     func testNavigationItemObserving_leftBarButtonItem() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Left!",
             style: .Plain,
@@ -106,6 +114,7 @@ class Tests: XCTestCase {
     }
 
     func testNavigationItemObserving_leftBarButtonItems() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.leftBarButtonItems = [
             UIBarButtonItem(
                 title: "Left1",
@@ -126,6 +135,7 @@ class Tests: XCTestCase {
     }
 
     func testNavigationItemObserving_leftItemsSupplementBackButton() {
+        self.navigationController.viewControllers[0] = self.viewController
         self.viewController.navigationItem.leftItemsSupplementBackButton = false
         XCTAssertEqual(self.viewController.navigationBar.items?.first?.leftItemsSupplementBackButton, false)
         self.viewController.navigationItem.leftItemsSupplementBackButton = true
