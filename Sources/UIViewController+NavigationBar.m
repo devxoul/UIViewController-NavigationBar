@@ -129,10 +129,14 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 #pragma mark - View life cycle
 
 - (void)UIViewControllerNavigationBar_viewWillAppear:(BOOL)animated {
-    [self UIViewControllerNavigationBar_viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:self.hasNavigationBar animated:animated];
-    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-    [self updateNavigationItem];
+    if (self.hasNavigationBar) {
+        [self UIViewControllerNavigationBar_viewWillAppear:animated];
+        [self.navigationController setNavigationBarHidden:self.hasNavigationBar animated:animated];
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+        [self updateNavigationItem];
+    } else {
+        [self UIViewControllerNavigationBar_viewWillAppear:animated];
+    }
 }
 
 - (void)UIViewControllerNavigationBar_viewDidLayoutSubviews {
