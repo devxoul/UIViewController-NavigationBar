@@ -54,27 +54,11 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        UIViewControllerNavigationBarSwizzle(self, @selector(navigationItem));
         UIViewControllerNavigationBarSwizzle(self, @selector(viewWillAppear:));
+        UIViewControllerNavigationBarSwizzle(self, @selector(viewDidAppear:));
         UIViewControllerNavigationBarSwizzle(self, @selector(viewDidLayoutSubviews));
-        UIViewControllerNavigationBarSwizzle(self, @selector(observeValueForKeyPath:ofObject:change:context:));
-        UIViewControllerNavigationBarSwizzle(self, NSSelectorFromString(@"dealloc"));
     });
-}
-
-
-#pragma mark - Observing keys
-
-+ (NSArray *)observingKeys {
-    return @[@"navigationItem.title",
-             @"navigationItem.titleView",
-             @"navigationItem.prompt",
-             @"navigationItem.backBarButtonItem",
-             @"navigationItem.hidesBackButton",
-             @"navigationItem.rightBarButtonItem",
-             @"navigationItem.rightBarButtonItems",
-             @"navigationItem.leftBarButtonItem",
-             @"navigationItem.leftBarButtonItems",
-             @"navigationItem.leftItemsSupplementBackButton"];
 }
 
 
@@ -91,38 +75,42 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 - (UINavigationBar *)navigationBar {
     UINavigationBar *navigationBar = objc_getAssociatedObject(self, @selector(navigationBar));
     if (!navigationBar) {
-        navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+        navigationBar = [[UINavigationBar alloc] init];
         navigationBar.delegate = self;
         objc_setAssociatedObject(self, @selector(navigationBar), navigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [self updateNavigationItem];
-        for (NSString *key in self.class.observingKeys) {
-            [self addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:nil];
-        }
     }
     return navigationBar;
+}
+
+- (UINavigationItem *)UIViewControllerNavigationBar_navigationItem {
+    if ([self isKindOfClass:UINavigationController.class]) {
+        return self.UIViewControllerNavigationBar_navigationItem;
+    }
+    SEL key = @selector(UIViewControllerNavigationBar_navigationItem);
+    UINavigationItem *item = objc_getAssociatedObject(self, key);
+    if (!item) {
+        item = [[UINavigationItem alloc] init];
+        objc_setAssociatedObject(self, key, item, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        [self.navigationBar pushNavigationItem:item animated:NO];
+    }
+    return item;
 }
 
 
 #pragma mark - Updating navigation item
 
 - (void)updateNavigationItem {
-    if ([self isKindOfClass:UINavigationController.class]) {
+    if (!self.hasNavigationBar) {
         return;
     }
-
-    NSMutableArray<UINavigationItem *> *items = @[].mutableCopy;
-    for (UIViewController *viewController in self.navigationController.viewControllers) {
-        [items addObject:[self deepCopy:viewController.navigationItem]];
+    self.navigationBar.items = @[];
+    if (self.navigationController.viewControllers.count > 1) {
+        NSInteger index = [self.navigationController.viewControllers indexOfObject:self];
+        UIViewController *viewController = self.navigationController.viewControllers[index - 1];
+        UINavigationItem *prevItem = [self deepCopy:viewController.navigationItem];
+        [self.navigationBar pushNavigationItem:prevItem animated:NO];
     }
-
-    if (items.count) {
-        UINavigationItem *navigationItem = [self deepCopy:self.navigationItem];
-        navigationItem.hidesBackButton = self.navigationItem.hidesBackButton;
-        navigationItem.leftItemsSupplementBackButton = self.navigationItem.leftItemsSupplementBackButton;
-        items[items.count - 1] = navigationItem;
-    }
-
-    self.navigationBar.items = items;
+    [self.navigationBar pushNavigationItem:self.navigationItem animated:NO];
 }
 
 
@@ -130,42 +118,35 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 
 - (void)UIViewControllerNavigationBar_viewWillAppear:(BOOL)animated {
     [self UIViewControllerNavigationBar_viewWillAppear:animated];
+    if ([self isKindOfClass:UINavigationController.class]) {
+        return;
+    }
     [self.navigationController setNavigationBarHidden:self.hasNavigationBar animated:animated];
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     [self updateNavigationItem];
 }
 
+- (void)UIViewControllerNavigationBar_viewDidAppear:(BOOL)animated {
+    [self UIViewControllerNavigationBar_viewDidAppear:animated];
+    if ([self isKindOfClass:UINavigationController.class]) {
+        return;
+    }
+    [self updateNavigationItem];
+}
+
 - (void)UIViewControllerNavigationBar_viewDidLayoutSubviews {
     [self UIViewControllerNavigationBar_viewDidLayoutSubviews];
+    if ([self isKindOfClass:UINavigationController.class]) {
+        return;
+    }
     if (self.hasNavigationBar) {
+        if (CGRectIsEmpty(self.navigationBar.frame)) {
+            self.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+        }
         [self.view addSubview:self.navigationBar];
-    }
-}
-
-- (void)UIViewControllerNavigationBar_observeValueForKeyPath:(NSString *)keyPath
-                                            ofObject:(id)object
-                                              change:(NSDictionary<NSString *,id> *)change
-                                             context:(void *)context {
-    if ([self.class.observingKeys containsObject:keyPath]) {
-        [self updateNavigationItem];
     } else {
-        [self UIViewControllerNavigationBar_observeValueForKeyPath:keyPath
-                                                          ofObject:object
-                                                            change:change
-                                                           context:context];
+        [self.navigationBar removeFromSuperview];
     }
-}
-
-- (void)UIViewControllerNavigationBar_dealloc {
-    for (NSString *key in self.class.observingKeys) {
-        @try {
-            [self removeObserver:self forKeyPath:key];
-        }
-        @catch (NSException *exception) {
-            // Do nothing
-        }
-    }
-    [self UIViewControllerNavigationBar_dealloc];
 }
 
 
