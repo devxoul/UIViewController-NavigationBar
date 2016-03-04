@@ -75,7 +75,7 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 - (UINavigationBar *)navigationBar {
     UINavigationBar *navigationBar = objc_getAssociatedObject(self, @selector(navigationBar));
     if (!navigationBar) {
-        navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+        navigationBar = [[UINavigationBar alloc] init];
         navigationBar.delegate = self;
         objc_setAssociatedObject(self, @selector(navigationBar), navigationBar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
@@ -140,6 +140,9 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
         return;
     }
     if (self.hasNavigationBar) {
+        if (CGRectIsEmpty(self.navigationBar.frame)) {
+            self.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+        }
         [self.view addSubview:self.navigationBar];
     } else {
         [self.navigationBar removeFromSuperview];
