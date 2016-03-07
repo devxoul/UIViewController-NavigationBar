@@ -36,4 +36,11 @@
 
 @property (nonatomic, strong, readonly, nonnull) UINavigationBar *navigationBar;
 
+/**
+ @return whether the view controller prefers navigation bar hidden. This method is only used when
+         `hasCustomNavigationBar` does not implemented. Override this method and return `YES` if you want to make a
+         view controller to hide built-in navigation bar. (default: NO)
+ */
+- (BOOL)prefersNavigationBarHidden;
+
 @end

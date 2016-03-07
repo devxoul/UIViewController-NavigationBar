@@ -88,10 +88,17 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     return item;
 }
 
+- (BOOL)prefersNavigationBarHidden {
+    return NO;
+}
+
 
 #pragma mark - Updating navigation item
 
 - (void)updateNavigationItem {
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
+        return;
+    }
     if (!self.hasCustomNavigationBar) {
         return;
     }
@@ -113,6 +120,10 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     if ([self isKindOfClass:UINavigationController.class]) {
         return;
     }
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
+        [self.navigationController setNavigationBarHidden:self.prefersNavigationBarHidden animated:animated];
+        return;
+    }
     [self.navigationController setNavigationBarHidden:self.hasCustomNavigationBar animated:animated];
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     [self updateNavigationItem];
@@ -123,12 +134,18 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     if ([self isKindOfClass:UINavigationController.class]) {
         return;
     }
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
+        return;
+    }
     [self updateNavigationItem];
 }
 
 - (void)UIViewControllerNavigationBar_viewDidLayoutSubviews {
     [self UIViewControllerNavigationBar_viewDidLayoutSubviews];
     if ([self isKindOfClass:UINavigationController.class]) {
+        return;
+    }
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
         return;
     }
     if (self.hasCustomNavigationBar) {
