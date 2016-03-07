@@ -22,9 +22,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (NavigationBar)
+@protocol UIViewControllerNavigationBar
+@optional
+/**
+ @return whether the view controller use custom navigation bar instead of built-in navigation bar. Implement this
+         method and return `YES` to use custom navigation bar in the view controller. Built-in navigation bar will be
+         hidden when this method returns `YES`.
+ */
+- (BOOL)hasCustomNavigationBar;
+@end
 
-@property (nonatomic, assign) BOOL hasNavigationBar;
+@interface UIViewController (NavigationBar) <UIViewControllerNavigationBar>
+
 @property (nonatomic, strong, readonly, nonnull) UINavigationBar *navigationBar;
 
 @end
