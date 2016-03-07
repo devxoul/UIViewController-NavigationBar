@@ -15,14 +15,14 @@ class Tests: XCTestCase {
     var rootViewController: UIViewController! {
         return self.navigationController.viewControllers.first
     }
-    var viewController: UIViewController!
+    var viewController: ViewController!
 
 
     // MARK: setUp
 
     override func setUp() {
         super.setUp()
-        self.viewController = UIViewController()
+        self.viewController = ViewController()
         self.navigationController = UINavigationController(rootViewController: UIViewController())
     }
 
@@ -210,6 +210,17 @@ class Tests: XCTestCase {
             }
         }
         self.waitForExpectationsWithTimeout(1, handler: nil)
+    }
+
+}
+
+
+final class ViewController: UIViewController {
+
+    var hasNavigationBar: Bool = false
+
+    override func hasCustomNavigationBar() -> Bool {
+        return self.hasNavigationBar
     }
 
 }

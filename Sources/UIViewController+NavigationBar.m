@@ -64,14 +64,6 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 
 #pragma mark - Properties
 
-- (BOOL)hasNavigationBar {
-    return [objc_getAssociatedObject(self, @selector(hasNavigationBar)) boolValue];
-}
-
-- (void)setHasNavigationBar:(BOOL)has {
-    objc_setAssociatedObject(self, @selector(hasNavigationBar), @(has), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (UINavigationBar *)navigationBar {
     UINavigationBar *navigationBar = objc_getAssociatedObject(self, @selector(navigationBar));
     if (!navigationBar) {
@@ -96,11 +88,18 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     return item;
 }
 
+- (BOOL)prefersNavigationBarHidden {
+    return NO;
+}
+
 
 #pragma mark - Updating navigation item
 
 - (void)updateNavigationItem {
-    if (!self.hasNavigationBar) {
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
+        return;
+    }
+    if (!self.hasCustomNavigationBar) {
         return;
     }
     self.navigationBar.items = @[];
@@ -121,7 +120,11 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     if ([self isKindOfClass:UINavigationController.class]) {
         return;
     }
-    [self.navigationController setNavigationBarHidden:self.hasNavigationBar animated:animated];
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
+        [self.navigationController setNavigationBarHidden:self.prefersNavigationBarHidden animated:animated];
+        return;
+    }
+    [self.navigationController setNavigationBarHidden:self.hasCustomNavigationBar animated:animated];
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     [self updateNavigationItem];
 }
@@ -129,6 +132,9 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 - (void)UIViewControllerNavigationBar_viewDidAppear:(BOOL)animated {
     [self UIViewControllerNavigationBar_viewDidAppear:animated];
     if ([self isKindOfClass:UINavigationController.class]) {
+        return;
+    }
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
         return;
     }
     [self updateNavigationItem];
@@ -139,7 +145,10 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     if ([self isKindOfClass:UINavigationController.class]) {
         return;
     }
-    if (self.hasNavigationBar) {
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
+        return;
+    }
+    if (self.hasCustomNavigationBar) {
         if (CGRectIsEmpty(self.navigationBar.frame)) {
             self.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
         }
