@@ -55,6 +55,7 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         UIViewControllerNavigationBarSwizzle(self, @selector(navigationItem));
+        UIViewControllerNavigationBarSwizzle(self, @selector(setTitle:));
         UIViewControllerNavigationBarSwizzle(self, @selector(viewWillAppear:));
         UIViewControllerNavigationBarSwizzle(self, @selector(viewDidAppear:));
         UIViewControllerNavigationBarSwizzle(self, @selector(viewDidLayoutSubviews));
@@ -86,6 +87,16 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
         [self.navigationBar pushNavigationItem:item animated:NO];
     }
     return item;
+}
+
+/**
+ UIViewController originally overwrites the value of `navigationItem.title` with the value of `title`. It doesn't work
+ property because we have swizzled `navigationItem`. To make it available, swizzle the `setTitle:` method to assign
+ the value manually.
+ */
+- (void)UIViewControllerNavigationBar_setTitle:(NSString *)title {
+    [self UIViewControllerNavigationBar_setTitle:title];
+    self.navigationItem.title = title;
 }
 
 - (BOOL)prefersNavigationBarHidden {
