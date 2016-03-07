@@ -12,16 +12,39 @@ UIViewController with its own navigation bar. It provides smooth push animations
 At a Glance
 -----------
 
-**UIViewController+NavigationBar** provides two properties: `hasNavigationBar` and `navigationBar` on UIViewController.
+Override `hasCustomNavigationBar` method to use custom navigation bar. Then you can use `navigationBar` property on `UIViewController`.
 
 ```swift
-let viewController = UIViewController()
-viewController.hasNavigationBar = true // I'm gonna use custom navigation bar!
+class MyViewController: UIViewController {
+
+    override func hasCustomNavigationBar() -> Bool {
+        return true // I'm gonna use custom navigation bar!
+    }
+
+}
+
+let viewController = MyViewController()
 viewController.navigationBar.barTintColor = .purpleColor() // Use custom navigation bar
 viewController.navigationItem.title = "Hello" // Change navigationItem property
 ```
 
-> **Note**: Don't be confused with `UINavigationController`'s `navigationBar`.
+> **Note**: Don't confuse with `UINavigationController`'s `navigationBar`.
+
+
+### Hiding System Navigation Bar
+
+With **UIViewController+NavigationBar**, you have to do something additional to make system navigation bar hidden.
+
+```swift
+class MyViewController: UIViewController {
+
+    /// Override this method to make built-in navigation bar hidden
+    override func prefersNavigationBarHidden() -> Bool {
+        return true
+    }
+
+}
+```
 
 
 Installation
