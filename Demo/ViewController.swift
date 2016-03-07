@@ -23,7 +23,7 @@
 import UIKit
 import UIViewController_NavigationBar
 
-final class ViewController: UIViewController {
+class ViewController: UIViewController {
 
     let button = UIButton(type: .System)
 
@@ -67,8 +67,7 @@ final class ViewController: UIViewController {
         let index = self.navigationController?.viewControllers.count ?? 1
         let configuration = configurations[index % configurations.count]
 
-        let viewController = ViewController()
-        viewController.hasNavigationBar = true
+        let viewController = BarViewController()
         viewController.navigationItem.title = "ViewController \(index)"
         if configuration.hasNavigationBackground {
             viewController.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
@@ -90,6 +89,18 @@ final class ViewController: UIViewController {
         let green = CGFloat(hex >> 8 & 0xff) / 255
         let blue  = CGFloat(hex & 0xff) / 255
         return UIColor(red: red, green: green, blue: blue, alpha: 1)
+    }
+
+    override func prefersNavigationBarHidden() -> Bool {
+        return true
+    }
+
+}
+
+class BarViewController: ViewController {
+
+    override func hasCustomNavigationBar() -> Bool {
+        return true
     }
 
 }
