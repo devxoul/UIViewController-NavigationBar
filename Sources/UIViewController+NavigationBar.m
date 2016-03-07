@@ -79,6 +79,9 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
     if ([self isKindOfClass:UINavigationController.class]) {
         return self.UIViewControllerNavigationBar_navigationItem;
     }
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
+        return self.UIViewControllerNavigationBar_navigationItem;
+    }
     SEL key = @selector(UIViewControllerNavigationBar_navigationItem);
     UINavigationItem *item = objc_getAssociatedObject(self, key);
     if (!item) {
@@ -96,6 +99,12 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
  */
 - (void)UIViewControllerNavigationBar_setTitle:(NSString *)title {
     [self UIViewControllerNavigationBar_setTitle:title];
+    if ([self isKindOfClass:UINavigationController.class]) {
+        return;
+    }
+    if (![self respondsToSelector:@selector(hasCustomNavigationBar)]) {
+        return;
+    }
     self.navigationItem.title = title;
 }
 
