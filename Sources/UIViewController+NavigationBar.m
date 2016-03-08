@@ -109,7 +109,12 @@ void UIViewControllerNavigationBarSwizzle(Class cls, SEL originalSelector) {
 }
 
 - (BOOL)prefersNavigationBarHidden {
-    return NO;
+    NSString *className = NSStringFromClass(self.class);
+    NSArray *externalClassNames = @[
+        @"CKSMSComposeRemoteViewController",
+        @"MFMailComposeRemoteViewController",
+    ];
+    return [externalClassNames containsObject:className];
 }
 
 
