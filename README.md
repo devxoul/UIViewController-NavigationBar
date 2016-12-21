@@ -4,6 +4,15 @@ UIViewController+NavigationBar
 [![Build Status](https://travis-ci.org/devxoul/UIViewController-NavigationBar.svg?branch=master)](https://travis-ci.org/devxoul/UIViewController-NavigationBar)
 [![CocoaPods](http://img.shields.io/cocoapods/v/UIViewController+NavigationBar.svg)](https://cocoapods.org/pods/UIViewController+NavigationBar)
 
+---
+
+⚠ Deprecation Warning
+---------------------
+
+This project is no longer maintained. Use [KMNavigationBarTransition](https://github.com/MoZhouqi/KMNavigationBarTransition) instead.
+
+---
+
 UIViewController with its own navigation bar. It provides smooth push animations between view controllers which have different navigation bar styles.
 
 ![uiviewcontroller navigationbar mov](https://cloud.githubusercontent.com/assets/931655/12593208/391d243a-c4b3-11e5-9a05-831f3c72753d.gif)
